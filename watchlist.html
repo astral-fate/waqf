@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وقف الابتكار | قائمة المتابعة</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                وقف <span>الابتكار</span>
+            </a>
+        </div>
+        
+        <div class="user-info">
+            <img src="images/male.png" alt="محمد العبدالله" class="user-avatar">
+            <div>
+                <p class="user-name">محمد العبدالله</p>
+                <p class="user-role">داعم ومستثمر</p>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="funder-dashboard.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    لوحة البيانات
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="contributions.html">
+                    <i class="fas fa-folder"></i>
+                    مساهماتي
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="watchlist.html">
+                    <i class="fas fa-bookmark"></i>
+                    قائمة المتابعة
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="reports.html">
+                    <i class="fas fa-chart-line"></i>
+                    تقارير الأثر/العائد
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="explore.html">
+                    <i class="fas fa-search"></i>
+                    استكشاف المشاريع
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    الإشعارات
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-user-cog"></i>
+                    الملف الشخصي
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-headset"></i>
+                    الدعم
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-bottom">
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                تسجيل الخروج
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dashboard-header">
+            <ul class="breadcrumb">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li>قائمة المتابعة</li>
+            </ul>
+            <h1 class="page-title">قائمة المتابعة</h1>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">مشاريع في قائمة المتابعة</p>
+                    <h3 class="stat-value">١٢</h3>
+                    <p class="stat-change">
+                        <i class="fas fa-plus"></i>
+                        ٣ مشاريع جديدة هذا الأسبوع
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">قريبة من اكتمال التمويل</p>
+                    <h3 class="stat-value">٤</h3>
+                    <p class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        أقل من أسبوع متبقي
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">متوسط العائد المتوقع</p>
+                    <h3 class="stat-value">٢٥٪</h3>
+                    <p class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        للمشاريع المتابعة
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="tabs">
+            <div class="tab active">الكل (١٢)</div>
+            <div class="tab">قريب من الاكتمال (٤)</div>
+            <div class="tab">جديد (٥)</div>
+            <div class="tab">مكتمل (٣)</div>
+        </div>
+
+        <!-- Watchlist Content -->
+        <div class="watchlist-grid">
+            <div class="watchlist-item">
+                <img src="images/sus.jpg" alt="نظام تصنيع صديق للبيئة" class="watchlist-img">
+                <div class="watchlist-content">
+                    <h3 class="watchlist-title">نظام تصنيع صديق للبيئة للمواد البلاستيكية</h3>
+                    <div class="watchlist-progress">
+                        <span>٤٨٠,٠٠٠ ريال هدف</span>
+                        <span>٤٠٪ مكتمل</span>
+                        <span>٢٣ يوم متبقي</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="watchlist-action">
+                    <a href="#" class="btn btn-primary btn-sm">ادعم الآن</a>
+                    <a href="#" class="btn btn-outline btn-sm">حذف</a>
+                </div>
+            </div>
+            
+            <div class="watchlist-item">
+                <img src="images/education.jpg" alt="تقنية تحلية مياه بالطاقة الشمسية" class="watchlist-img">
+                <div class="watchlist-content">
+                    <h3 class="watchlist-title">تقنية تحلية مياه بالطاقة الشمسية</h3>
+                    <div class="watchlist-progress">
+                        <span>٢٥٠,٠٠٠ ريال هدف</span>
+                        <span>٨٥٪ مكتمل</span>
+                        <span>٨ أيام متبقية</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="watchlist-action">
+                    <a href="#" class="btn btn-primary btn-sm">ادعم الآن</a>
+                    <a href="#" class="btn btn-outline btn-sm">حذف</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

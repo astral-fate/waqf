@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وقف الابتكار | لوحة تحكم صاحب المشروع</title>
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --secondary: #26a69a;
+            --accent: #ff5722;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --dark: #2c3e50;
+            --light: #f5f5f5;
+            --gray: #ecf0f1;
+            --sidebar-width: 260px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .sidebar-logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-logo span {
+            color: var(--accent);
+        }
+        
+        .user-info {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 15px;
+            object-fit: cover;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .user-role {
+            color: #777;
+            font-size: 12px;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+            list-style: none;
+        }
+        
+        .menu-item {
+            position: relative;
+        }
+        
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .menu-item.active a {
+            background: rgba(30, 136, 229, 0.1);
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+        
+        .menu-item a:hover {
+            background: rgba(30, 136, 229, 0.05);
+        }
+        
+        .menu-item i {
+            margin-left: 10px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-bottom {
+            padding: 20px;
+            border-top: 1px solid var(--gray);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            color: var(--danger);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .logout-btn i {
+            margin-left: 10px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 30px;
+            width: calc(100% - var(--sidebar-width));
+        }
+        
+        /* Dashboard Header */
+        .dashboard-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb li:not(:last-child):after {
+            content: "/";
+            margin: 0 5px;
+            color: #aaa;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb li:last-child {
+            color: #777;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background-color: rgba(30, 136, 229, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-left: 15px;
+        }
+        
+        .stat-card:nth-child(2) .stat-icon {
+            background-color: rgba(38, 166, 154, 0.1);
+            color: var(--secondary);
+        }
+        
+        .stat-card:nth-child(3) .stat-icon {
+            background-color: rgba(255, 87, 34, 0.1);
+            color: var(--accent);
+        }
+        
+        .stat-card:nth-child(4) .stat-icon {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: var(--warning);
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-title {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .stat-change {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-change.positive {
+            color: var(--success);
+        }
+        
+        .stat-change.negative {
+            color: var(--danger);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab.active:after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .status-funded {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+        
+        .status-active {
+            background-color: rgba(30, 136, 229, 0.1);
+            color: var(--primary);
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: var(--warning);
+        }
+        
+        .status-draft {
+            background-color: rgba(158, 158, 158, 0.1);
+            color: #757575;
+        }
+        
+        .project-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .project-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .project-detail-label {
+            color: #777;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--gray);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--success);
+        }
+        
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .backers {
+            display: flex;
+            align-items: center;
+        }
+        
+        .backers-avatars {
+            display: flex;
+        }
+        
+        .backer-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-right: -8px;
+        }
+        
+        .backers-count {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        
+        .view-project {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .view-project i {
+            margin-right: 5px;
+        }
+        
+        .status-info, .draft-note {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* Recent Activities */
+        .recent-activities {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .view-all-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .activities-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 15px 0;
+            display: flex;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 18px;
+        }
+        
+        .activity-funding {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+        
+        .activity-comment {
+            background-color: rgba(30, 136, 229, 0.1);
+            color: var(--primary);
+        }
+        
+        .activity-update {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: var(--warning);
+        }
+        
+        .activity-verify {
+            background-color: rgba(38, 166, 154, 0.1);
+            color: var(--secondary);
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-text {
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Create Project Button */
+        .create-project {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(30, 136, 229, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 100;
+        }
+        
+        .create-project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(30, 136, 229, 0.5);
+        }
+        
+        /* Button Styling */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1976d2;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(30, 136, 229, 0.1);
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        
+        /* Notifications */
+        .notifications-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .notifications-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--dark);
+            font-size: 20px;
+        }
+        
+        .notifications-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--danger);
+            color: white;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 992px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(100%);
+                transition: transform 0.3s;
+                z-index: 1000;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 0;
+                width: 100%;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: var(--primary);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                وقف <span>الابتكار</span>
+            </a>
+        </div>
+        
+        <div class="user-info">
+            <img src="/api/placeholder/100/100" alt="أحمد محمد" class="user-avatar">
+            <div>
+                <p class="user-name">أحمد محمد</p>
+                <p class="user-role">صاحب مشروع</p>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="menu-item active">
+                <a href="#">
+                    <i class="fas fa-tachometer-alt"></i>
+                    لوحة القيادة
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-project-diagram"></i>
+                    مشاريعي
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    التمويل
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    التحليلات
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                    الإشعارات
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-user-cog"></i>
+                    الملف الشخصي
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="#">
+                    <i class="fas fa-headset"></i>
+                    الدعم
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-bottom">
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                تسجيل الخروج
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dashboard-header">
+            <ul class="breadcrumb">
+                <li><a href="#">الرئيسية</a></li>
+                <li>لوحة القيادة</li>
+            </ul>
+            <h1 class="page-title">لوحة القيادة</h1>
+            <p>مرحباً بك أحمد، هذه نظرة عامة على مشاريعك والتمويل</p>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">إجمالي التمويل</p>
+                    <h3 class="stat-value">٣٥٠,٠٠٠ ريال</h3>
+                    <p class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        ١٥.٧٪ مقارنة بالشهر الماضي
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">عدد الداعمين</p>
+                    <h3 class="stat-value">١٨٥</h3>
+                    <p class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        ٨.٢٪ مقارنة بالشهر الماضي
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">نسبة اكتمال التمويل</p>
+                    <h3 class="stat-value">٧٠.٨٪</h3>
+                    <p class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        ٥.٣٪ مقارنة بالأسبوع الماضي
+                    </p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <p class="stat-title">عدد المشاهدات</p>
+                    <h3 class="stat-value">١٢,٦٤٢</h3>
+                    <p class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i>
+                        ٣.١٪ مقارنة بالأسبوع الماضي
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">جميع المشاريع</div>
+            <div class="tab">قيد التمويل</div>
+            <div class="tab">مكتمل التمويل</div>
+            <div class="tab">قيد التحقق</div>
+            <div class="tab">مسودات</div>
+        </div>
+        
+        <div class="grid-container">
+            <!-- Projects -->
+            <div class="projects-section">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="images/ai.jpeg" alt="منصة ذكاء اصطناعي للزراعة الذكية" class="project-img">
+                        <div class="project-content">
+                            <div class="project-status status-active">قيد التمويل</div>
+                            <h3 class="project-title">منصة ذكاء اصطناعي للزراعة الذكية</h3>
+                            <div class="project-detail">
+                                <span class="project-detail-label">الهدف:</span>
+                                <span>٥٠٠,٠٠٠ ريال</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">تم جمع:</span>
+                                <span>٣٢٥,٠٠٠ ريال (٦٥٪)</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">المدة المتبقية:</span>
+                                <span>١٨ يوم</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 65%"></div>
+                            </div>
+                            <div class="project-footer">
+                                <div class="backers">
+                                    <div class="backers-avatars">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                    </div>
+                                    <span class="backers-count">+٤٢ داعم</span>
+                                </div>
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-edit"></i>
+                                    إدارة المشروع
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="images/med.jpg" alt="تطبيق للكشف المبكر عن الأمراض المزمنة" class="project-img">
+                        <div class="project-content">
+                            <div class="project-status status-funded">مكتمل التمويل</div>
+                            <h3 class="project-title">تطبيق للكشف المبكر عن الأمراض المزمنة</h3>
+                            <div class="project-detail">
+                                <span class="project-detail-label">الهدف:</span>
+                                <span>٣٠٠,٠٠٠ ريال</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">تم جمع:</span>
+                                <span>٣٠٠,٠٠٠ ريال (١٠٠٪)</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">تاريخ الاكتمال:</span>
+                                <span>قبل ٥ أيام</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 100%"></div>
+                            </div>
+                            <div class="project-footer">
+                                <div class="backers">
+                                    <div class="backers-avatars">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                        <img src="/api/placeholder/100/100" alt="داعم" class="backer-avatar">
+                                    </div>
+                                    <span class="backers-count">+١٢٠ داعم</span>
+                                </div>
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-edit"></i>
+                                    إدارة المشروع
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="images/sus.jpg" alt="نظام تصنيع صديق للبيئة" class="project-img">
+                        <div class="project-content">
+                            <div class="project-status status-pending">قيد التحقق</div>
+                            <h3 class="project-title">نظام تصنيع صديق للبيئة للمواد البلاستيكية</h3>
+                            <div class="project-detail">
+                                <span class="project-detail-label">الهدف:</span>
+                                <span>٤٥٠,٠٠٠ ريال</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">تاريخ التقديم:</span>
+                                <span>قبل ٣ أيام</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">الحالة:</span>
+                                <span>في انتظار المراجعة</span>
+                            </div>
+                            <div class="project-footer">
+                                <div class="status-info">قيد المراجعة من فريق التحقق</div>
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-eye"></i>
+                                    عرض التفاصيل
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-content">
+                            <div class="project-status status-draft">مسودة</div>
+                            <h3 class="project-title">روبوت مساعد للرعاية الصحية المنزلية</h3>
+                            <div class="project-detail">
+                                <span class="project-detail-label">تم إنشاؤها:</span>
+                                <span>قبل أسبوعين</span>
+                            </div>
+                            <div class="project-detail">
+                                <span class="project-detail-label">اكتمال البيانات:</span>
+                                <span>٧٠٪</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 70%; background-color: #9e9e9e;"></div>
+                            </div>
+                            <div class="project-footer">
+                                <div class="draft-note">يلزم إكمال البيانات</div>
+                                <a href="#" class="view-project">
+                                    <i class="fas fa-edit"></i>
+                                    إكمال المسودة
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activities -->
+            <div class="recent-activities">
+                <div class="section-header">
+                    <h3 class="section-title">آخر النشاطات</h3>
+                    <a href="#" class="view-all-link">عرض الكل</a>
+                </div>
+                
+                <ul class="activities-list">
+                    <li class="activity-item">
+                        <div class="activity-icon activity-funding">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-text">قام <span class="highlight">عبدالله الغامدي</span> بدعم مشروعك <span class="highlight">منصة ذكاء اصطناعي للزراعة الذكية</span> بمبلغ <span class="highlight">١٥,٠٠٠ ريال</span></p>
+                            <p class="activity-time">منذ ساعتين</p>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon activity-comment">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-text">تم إضافة تعليق جديد من <span class="highlight">سارة القحطاني</span> على مشروع <span class="highlight">منصة ذكاء اصطناعي للزراعة الذكية</span></p>
+                            <p class="activity-time">منذ ٥ ساعات</p>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon activity-verify">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-text">تم الموافقة على مشروعك <span class="highlight">تطبيق للكشف المبكر عن الأمراض المزمنة</span> من قبل فريق التحقق</p>
+                            <p class="activity-time">منذ ٦ أيام</p>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon activity-funding">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-text">قام <span class="highlight">خالد العتيبي</span> بدعم مشروعك <span class="highlight">تطبيق للكشف المبكر عن الأمراض المزمنة</span> بمبلغ <span class="highlight">٥,٠٠٠ ريال</span></p>
+                            <p class="activity-time">منذ أسبوع</p>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon activity-update">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="activity-text">قمت بتحديث معلومات مشروع <span class="highlight">تطبيق للكشف المبكر عن الأمراض المزمنة</span></p>
+                            <p class="activity-time">منذ أسبوع</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Create Project Button -->
+        <div class="create-project">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+</body>
+</html>

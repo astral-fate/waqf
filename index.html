@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وقف الابتكار | منصة التمويل الجماعي للابتكار</title>
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --secondary: #26a69a;
+            --accent: #ff5722;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --dark: #2c3e50;
+            --light: #f5f5f5;
+            --gray: #ecf0f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-right: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border: 2px solid var(--primary);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1976d2;
+            border-color: #1976d2;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e88e5 0%, #26a69a 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border: 2px solid var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2196f3;
+            border-color: #2196f3;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            height: 3px;
+            width: 70px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            margin: 0 15px 30px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .step-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        /* Featured Projects */
+        .featured-projects {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .project-desc {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--success);
+        }
+        
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .view-all {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-content::before, .testimonial-content::after {
+            content: '"';
+            font-size: 30px;
+            color: var(--primary);
+            font-family: serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: 15px;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 600;
+        }
+        
+        .author-title {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-col h4::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 50px;
+            background-color: var(--primary);
+            bottom: -10px;
+            right: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #bbb;
+        }
+        
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .verified-badge i {
+            margin-left: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .step {
+                min-width: 100%;
+                margin: 0 0 30px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">وقف <span>الابتكار</span></a>
+            <ul class="nav-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المشاريع</a></li>
+                <li><a href="#">كيف نعمل</a></li>
+                <li><a href="#">من نحن</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline">تسجيل الدخول</a>
+                <a href="#" class="btn btn-primary">تسجيل حساب</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>دعم الابتكار عبر التمويل الجماعي</h1>
+            <p>منصة "وقف الابتكار" تجمع بين المبتكرين والداعمين لتمويل مشاريع ابتكارية ذات أثر إيجابي وعوائد مشتركة</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-secondary">قدم مشروعك</a>
+                <a href="#" class="btn btn-primary">تصفح المشاريع</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">كيف تعمل المنصة</h2>
+            <p>عملية بسيطة ومرنة تتيح للمبتكرين تقديم مشاريعهم وللداعمين المساهمة في تمويلها مع إمكانية تحقيق عوائد</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>تقديم المشروع</h3>
+                    <p>قدم فكرتك الابتكارية مع تفاصيل المشروع والميزانية المطلوبة خلال 5 دقائق فقط</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>التحقق والمراجعة</h3>
+                    <p>تتم مراجعة المشروع والتحقق منه من قبل شركائنا المختصين قبل عرضه للتمويل</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>التمويل الجماعي</h3>
+                    <p>يبدأ تمويل المشروع من الداعمين مع تتبع التقدم المحرز في التمويل</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>تنفيذ المشروع والعوائد</h3>
+                    <p>يتم تنفيذ المشروع ومشاركة التحديثات مع توزيع العوائد المحتملة على الداعمين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">مشاريع مميزة</h2>
+            <p>اكتشف أحدث المشاريع الابتكارية التي تم التحقق منها وجاهزة للتمويل</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="images/ai.jpeg" alt="مشروع تقني" class="project-img">
+                    <div class="project-content">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                            تم التحقق
+                        </div>
+                        <span class="project-category">تقني</span>
+                        <h3 class="project-title">منصة ذكاء اصطناعي للزراعة الذكية</h3>
+                        <p class="project-desc">تطوير منصة تعتمد على الذكاء الاصطناعي لتحسين الإنتاج الزراعي وترشيد استهلاك المياه</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <div class="project-stats">
+                            <span>65% من التمويل</span>
+                            <span>٤٥ داعم</span>
+                            <span>١٥٠,٠٠٠ ريال</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="images/med.jpg" alt="مشروع طبي" class="project-img">
+                    <div class="project-content">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                            تم التحقق
+                        </div>
+                        <span class="project-category">طبي</span>
+                        <h3 class="project-title">جهاز طبي للكشف المبكر عن الأمراض المزمنة</h3>
+                        <p class="project-desc">تطوير جهاز محمول يستخدم تقنيات غير جراحية للكشف المبكر عن أمراض القلب والسكري</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%"></div>
+                        </div>
+                        <div class="project-stats">
+                            <span>85% من التمويل</span>
+                            <span>١٢٠ داعم</span>
+                            <span>٣٠٠,٠٠٠ ريال</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="images/sus.jpg" alt="مشروع صناعي" class="project-img">
+                    <div class="project-content">
+                        <div class="verified-badge">
+                            <i class="fas fa-check-circle"></i>
+                            تم التحقق
+                        </div>
+                        <span class="project-category">صناعي</span>
+                        <h3 class="project-title">نظام تصنيع صديق للبيئة لمواد البناء</h3>
+                        <p class="project-desc">تطوير تقنية مبتكرة لإنتاج مواد بناء من نفايات معاد تدويرها بتكلفة أقل وأداء أفضل</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%"></div>
+                        </div>
+                        <div class="project-stats">
+                            <span>40% من التمويل</span>
+                            <span>٣٢ داعم</span>
+                            <span>٤٨٠,٠٠٠ ريال</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all">
+                <a href="#" class="btn btn-primary">عرض جميع المشاريع</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>٥٠+</h3>
+                    <p>مشروع ابتكاري</p>
+                </div>
+                
+                <div class="stat-item">
+                    <h3>٢٠٠٠+</h3>
+                    <p>داعم ومستثمر</p>
+                </div>
+                
+                <div class="stat-item">
+                    <h3>٨ مليون</h3>
+                    <p>ريال تم جمعها</p>
+                </div>
+                
+                <div class="stat-item">
+                    <h3>٢٥+</h3>
+                    <p>مشروع مكتمل التمويل</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">قصص نجاح</h2>
+            <p>تجارب حقيقية من مبتكرين وداعمين استفادوا من منصة وقف الابتكار</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-content">استطعنا بفضل منصة وقف الابتكار جمع التمويل اللازم لمشروعنا في مجال الطاقة المتجددة خلال شهرين فقط، والآن نحن في مرحلة الإنتاج التجريبي!</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="محمد العتيبي" class="author-img">
+                        <div>
+                            <p class="author-name">م. محمد العتيبي</p>
+                            <p class="author-title">مؤسس شركة الطاقة المستدامة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-content">كداعم، أحببت شفافية المنصة وآلية متابعة المشاريع والتحقق منها، مما جعلني أثق بالمشاريع المعروضة وأساهم في تمويل ثلاثة منها حتى الآن.</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="سارة القحطاني" class="author-img">
+                        <div>
+                            <p class="author-name">د. سارة القحطاني</p>
+                            <p class="author-title">داعمة ومستثمرة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial">
+                    <p class="testimonial-content">كنت قلقًا من عملية التحقق في البداية، لكن الفريق كان متعاونًا وسهّل الأمر علينا. نجحنا في جمع التمويل وبدأنا في تحقيق عوائد للداعمين قبل الموعد المتوقع!</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="خالد السعيد" class="author-img">
+                        <div>
+                            <p class="author-name">م. خالد السعيد</p>
+                            <p class="author-title">مبتكر في المجال الطبي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>كن جزءًا من مستقبل الابتكار</h2>
+            <p>ابدأ رحلتك الآن، سواء كنت مبتكرًا تبحث عن تمويل لمشروعك أو داعمًا ترغب في المساهمة في تمويل الابتكارات ذات الأثر الإيجابي</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">تسجيل حساب داعم</a>
+                <a href="#" class="btn btn-secondary">تقديم مشروع جديد</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>وقف الابتكار</h4>
+                    <p>منصة تمويل جماعي تربط المبتكرين بالداعمين لتمويل مشاريع ابتكارية ذات أثر إيجابي وعوائد مشتركة.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">المشاريع</a></li>
+                        <li><a href="#">كيف نعمل</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>الدعم</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">لوحة تحكم المسؤول </a></li>
+                        <li><a href="funder-dashboard.html">لوحة تحكم الممول </a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>تواصل معنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-twitter"></i> تويتر</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> لينكد إن</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> انستغرام</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@waqf-innovation.sa</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة &copy; 2025 وقف الابتكار | بالشراكة مع وزارة الابتكار وهيئة المنشآت الصغيرة والمتوسطة</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
